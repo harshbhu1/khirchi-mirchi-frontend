@@ -29,10 +29,19 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
+      // No prop-types package in this project — props are documented inline.
+      'react/prop-types': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
+    },
+  },
+  {
+    // Config files run in Node, not the browser.
+    files: ['*.config.js', 'vite.config.js', 'tailwind.config.js', 'postcss.config.js'],
+    languageOptions: {
+      globals: { ...globals.node },
     },
   },
 ]
