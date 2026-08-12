@@ -11,7 +11,7 @@ import "./index.css";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ThemeProvider>
           <ToastProvider>
             <WorkbookProvider>

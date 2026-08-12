@@ -4,6 +4,7 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/khirchi-mirchi-frontend/",
   plugins: [react()],
   resolve: {
     alias: {
@@ -11,6 +12,8 @@ export default defineConfig({
     },
   },
   build: {
+    // Output straight into docs/ so GitHub Pages can serve it from the master branch.
+    outDir: "docs",
     // Splitting keeps the spreadsheet parser out of the first paint.
     rollupOptions: {
       output: {
