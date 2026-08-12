@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChartSpline, LogOut, PanelLeft, PanelLeftClose, X } from "lucide-react";
 import { NAV_ITEMS } from "./navigation";
@@ -71,6 +71,7 @@ function NavItem({ item, collapsed, index, onNavigate }) {
 
 export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile }) {
   const user = Auth.getUserDetails();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -189,7 +190,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
                 type="button"
                 onClick={() => {
                   Auth.logout();
-                  window.location.assign("/login");
+                  navigate("/login");
                 }}
                 aria-label="Sign out"
                 className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-rose-500/10 hover:text-rose-500"
