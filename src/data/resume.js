@@ -21,6 +21,7 @@ export const TECH_STACK = [
   "CSS",
   "JavaScript",
   "Node.js",
+  "spring boot",
   "MongoDB",
   "Git & GitHub",
   "Robotics",
@@ -30,7 +31,7 @@ export const TECH_STACK = [
   "SQL",
 ];
 
-export const FRAMEWORKS = ["React.js", "Express.js", "Tailwind CSS", "ROS (Humble)"];
+export const FRAMEWORKS = ["React.js", "Express.js", "Tailwind CSS", "ROS (Humble),","spring boot"];
 
 export const LANGUAGES = [
   { name: "Hindi", level: "Native" },
@@ -39,8 +40,10 @@ export const LANGUAGES = [
 
 export const CERTIFICATIONS = [
   "Frontend Development — React",
-  "Backend Development — Node.js",
+  "Backend Development — Node.js, Java,spring boot",
   "Python",
+  "java"
+   
 ];
 
 /** Shown as plain badges, not links — the resume names these platforms but no profile URL. */
