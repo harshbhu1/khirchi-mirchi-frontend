@@ -1,4 +1,4 @@
-import { ChartColumn, Contact, Database, Settings, Upload } from "lucide-react";
+import { ChartColumn, Contact, Database, Music2, Settings, Upload } from "lucide-react";
 
 /** Sidebar order matters — Upload is the landing tab. */
 export const NAV_ITEMS = [
@@ -25,6 +25,12 @@ export const NAV_ITEMS = [
     label: "Settings",
     icon: Settings,
     description: "Workspace preferences",
+  },
+  {
+    to: "/music",
+    label: "Music",
+    icon: Music2,
+    description: "Village vibes & tunes",
   },
   {
     to: "/about",

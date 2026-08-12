@@ -11,6 +11,7 @@ const COLLAPSE_KEY = "sidebar:collapsed";
 export default function DashboardLayout() {
   const { theme, toggleTheme } = useThemeContext();
   const { pathname } = useLocation();
+  const isMusicRoute = pathname === "/music";
 
   const [collapsed, setCollapsed] = useState(
     () => localStorage.getItem(COLLAPSE_KEY) === "true",
@@ -44,8 +45,9 @@ export default function DashboardLayout() {
 
       <div
         className={cn(
-          "flex min-h-screen flex-col transition-[padding] duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
+          "flex flex-col transition-[padding] duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
           collapsed ? "lg:pl-[76px]" : "lg:pl-64",
+          isMusicRoute ? "h-screen overflow-hidden" : "min-h-screen",
         )}
       >
         <Topbar
@@ -55,11 +57,17 @@ export default function DashboardLayout() {
         />
 
         {/* key forces the enter animation to replay on every route change */}
-        <main key={pathname} className="flex-1 animate-fade-up p-4 sm:p-6">
+        <main
+          key={pathname}
+          className={cn(
+            "flex-1 animate-fade-up p-4 sm:p-6",
+            isMusicRoute && "min-h-0 overflow-hidden",
+          )}
+        >
           <Outlet />
         </main>
 
-        <Footer />
+        {!isMusicRoute && <Footer />}
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ import LoginForm from "./views/login/LoginForm";
 const UploadView = lazy(() => import("./views/upload/UploadView"));
 const ReportsView = lazy(() => import("./views/reports/ReportsView"));
 const AboutView = lazy(() => import("./views/about/AboutView"));
+const MusicView = lazy(() => import("./views/music/MusicView"));
 
 function RouteFallback() {
   return (
@@ -68,6 +69,15 @@ export default function App() {
               title="Settings"
               description="Workspace preferences, team members, and API configuration."
             />
+          }
+        />
+
+        <Route
+          path="/music"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <MusicView />
+            </Suspense>
           }
         />
 
