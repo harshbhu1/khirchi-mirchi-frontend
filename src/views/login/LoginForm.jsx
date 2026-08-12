@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChartSpline, Eye, EyeOff, Lock, Mail } from "lucide-react";
+import AnimatedVillageTruck from "../../components/decor/AnimatedVillageTruck";
 
 const containerVariants = {
   hidden: {},
@@ -63,6 +64,9 @@ export default function LoginForm({ onSubmit }) {
         animate={{ x: [0, 25, 0], y: [0, -20, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       />
+
+      {/* Indian village scene with a truck looping along the road */}
+      <AnimatedVillageTruck />
 
       {/* Glass card */}
       <motion.div

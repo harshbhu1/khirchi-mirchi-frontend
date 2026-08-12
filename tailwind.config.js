@@ -64,6 +64,49 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-6px)" },
         },
+        drive: {
+          "0%": { left: "-16%" },
+          "100%": { left: "106%" },
+        },
+        "wheel-spin": {
+          to: { transform: "rotate(360deg)" },
+        },
+        "road-scroll": {
+          to: { backgroundPosition: "-48px 0" },
+        },
+        "eq-bounce": {
+          "0%, 100%": { transform: "scaleY(0.35)" },
+          "50%": { transform: "scaleY(1)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        twinkle: {
+          "0%, 100%": { opacity: "0.15" },
+          "50%": { opacity: "1" },
+        },
+        "bird-fly": {
+          "0%": { transform: "translateX(-10%)" },
+          "100%": { transform: "translateX(120%)" },
+        },
+        "truck-bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-2px)" },
+        },
+        "dust-puff": {
+          "0%": { transform: "translateY(0) scale(0.4)", opacity: "0.55" },
+          "100%": { transform: "translateY(-12px) scale(1.6)", opacity: "0" },
+        },
+        "note-float": {
+          "0%": { transform: "translateY(0) translateX(0) rotate(0deg)", opacity: "0" },
+          "15%": { opacity: "1" },
+          "100%": { transform: "translateY(-58px) translateX(var(--drift, 12px)) rotate(20deg)", opacity: "0" },
+        },
+        "tassel-sway": {
+          "0%, 100%": { transform: "rotate(-4deg)" },
+          "50%": { transform: "rotate(4deg)" },
+        },
       },
       animation: {
         "fade-in": "fade-in .35s ease-out both",
@@ -75,6 +118,17 @@ export default {
         "copy-flash": "copy-flash .9s ease-out",
         "pulse-ring": "pulse-ring 2s cubic-bezier(.24,0,.38,1) infinite",
         float: "float 4s ease-in-out infinite",
+        drive: "drive 16s linear infinite",
+        "wheel-spin": "wheel-spin 0.7s linear infinite",
+        "road-scroll": "road-scroll 0.7s linear infinite",
+        "eq-bounce": "eq-bounce 0.9s ease-in-out infinite",
+        marquee: "marquee 9s linear infinite",
+        twinkle: "twinkle 2.4s ease-in-out infinite",
+        "bird-fly": "bird-fly 22s linear infinite",
+        "truck-bounce": "truck-bounce 0.35s ease-in-out infinite",
+        "dust-puff": "dust-puff 0.9s ease-out infinite",
+        "note-float": "note-float 3s ease-in infinite",
+        "tassel-sway": "tassel-sway 1.6s ease-in-out infinite",
       },
     },
   },
