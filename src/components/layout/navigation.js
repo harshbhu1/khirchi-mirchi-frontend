@@ -1,4 +1,13 @@
-import { ChartColumn, Contact, Database, Music2, Settings, Smartphone, Upload } from "lucide-react";
+import {
+  ChartColumn,
+  Contact,
+  Database,
+  Music2,
+  QrCode,
+  Settings,
+  Smartphone,
+  Upload,
+} from "lucide-react";
 
 /** Sidebar order matters — Upload is the landing tab. */
 export const NAV_ITEMS = [
@@ -31,6 +40,12 @@ export const NAV_ITEMS = [
     label: "Music",
     icon: Music2,
     description: "Village vibes & tunes",
+  },
+  {
+    to: "/qr-generator",
+    label: "QR Generator",
+    icon: QrCode,
+    description: "Turn a message into a QR code",
   },
   {
     to: "/try-phone",
