@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import Footer from "./Footer";
 import { useThemeContext } from "../../context/theme-context";
 import cn from "../../utils/cn";
+
+// Pulls in the qrcode library — kept out of the initial bundle.
+const TryOnPhoneButton = lazy(() => import("../qr/TryOnPhoneButton"));
 
 const COLLAPSE_KEY = "sidebar:collapsed";
 
@@ -69,6 +72,12 @@ export default function DashboardLayout() {
 
         {!isMusicRoute && <Footer />}
       </div>
+
+      {!isMusicRoute && (
+        <Suspense fallback={null}>
+          <TryOnPhoneButton />
+        </Suspense>
+      )}
     </div>
   );
 }

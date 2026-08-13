@@ -17,6 +17,7 @@ const UploadView = lazy(() => import("./views/upload/UploadView"));
 const ReportsView = lazy(() => import("./views/reports/ReportsView"));
 const AboutView = lazy(() => import("./views/about/AboutView"));
 const MusicView = lazy(() => import("./views/music/MusicView"));
+const TryPhoneView = lazy(() => import("./views/tryphone/TryPhoneView"));
 
 function RouteFallback() {
   return (
@@ -77,6 +78,15 @@ export default function App() {
           element={
             <Suspense fallback={<RouteFallback />}>
               <MusicView />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/try-phone"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <TryPhoneView />
             </Suspense>
           }
         />

@@ -1,4 +1,4 @@
-import { ChartColumn, Contact, Database, Music2, Settings, Upload } from "lucide-react";
+import { ChartColumn, Contact, Database, Music2, Settings, Smartphone, Upload } from "lucide-react";
 
 /** Sidebar order matters — Upload is the landing tab. */
 export const NAV_ITEMS = [
@@ -31,6 +31,14 @@ export const NAV_ITEMS = [
     label: "Music",
     icon: Music2,
     description: "Village vibes & tunes",
+  },
+  {
+    to: "/try-phone",
+    label: "Try on Phone",
+    icon: Smartphone,
+    description: "Scan a QR to open on mobile",
+    // Desktop gets a floating button (TryOnPhoneButton) instead — see Sidebar.jsx.
+    mobileOnly: true,
   },
   {
     to: "/about",

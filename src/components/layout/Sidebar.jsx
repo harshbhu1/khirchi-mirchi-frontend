@@ -149,13 +149,9 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
           </p>
 
           {NAV_ITEMS.map((item, index) => (
-            <NavItem
-              key={item.to}
-              item={item}
-              index={index}
-              collapsed={collapsed}
-              onNavigate={onCloseMobile}
-            />
+            <div key={item.to} className={item.mobileOnly ? "lg:hidden" : undefined}>
+              <NavItem item={item} index={index} collapsed={collapsed} onNavigate={onCloseMobile} />
+            </div>
           ))}
         </nav>
 
