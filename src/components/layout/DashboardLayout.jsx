@@ -71,6 +71,9 @@ export default function DashboardLayout() {
         </main>
 
         {!isMusicRoute && <Footer />}
+
+        {/* Reserves room so the floating "Try in your phone" button never sits over the footer's links. */}
+        {!isMusicRoute && <div aria-hidden="true" className="hidden h-24 lg:block" />}
       </div>
 
       {!isMusicRoute && (

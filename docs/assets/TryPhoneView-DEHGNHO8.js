@@ -1,1 +1,0 @@
-import{j as e}from"./motion-0pvQw7Cl.js";import{T as r}from"./TryOnPhoneCard-CDvjj1Qd.js";import"./react-UJS8JEiy.js";import"./index-DVdT63HS.js";function i(){return e.jsx("div",{className:"mx-auto flex max-w-md animate-fade-up flex-col items-center py-10",children:e.jsx(r,{})})}export{i as default};
