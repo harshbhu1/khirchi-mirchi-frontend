@@ -1,0 +1,401 @@
+/*
+ * Fixes layered on top of the ported template stylesheet. Kept separate so
+ * `zoo-template.css` stays a faithful copy of the original.
+ *
+ * WHY THE OVERLAPPING HAPPENS
+ * The 2011 template hard-codes the height of every content block — #zoo, #info,
+ * #contact and #tickets at 713px, #events, #gallery and #live at 911px. Those
+ * numbers were measured against its lorem-ipsum placeholder text. Real content
+ * is taller, so each block overflowed its box and ran underneath the following
+ * section and the footer.
+ *
+ * IMPORTANT — SPECIFICITY
+ * The template writes these as `#content div#zoo` (two ids, one class, one
+ * element). A shorter override like `.zoo-site #zoo` loses the cascade no
+ * matter how late it appears, which is exactly why an earlier attempt at this
+ * file did nothing. Every override below therefore repeats the template's own
+ * selector shape, so it matches on specificity and wins on order.
+ *
+ * Must be imported AFTER zoo-template.css.
+ */
+
+/* ── Content blocks grow with their content ───────────────────────────── */
+
+.zoo-site #content div#zoo,
+.zoo-site #content div#info,
+.zoo-site #content div#events,
+.zoo-site #content div#gallery,
+.zoo-site #content div#tickets,
+.zoo-site #content div#contact,
+.zoo-site #content div#live,
+.zoo-site #content div#blog {
+  height: auto;
+  min-height: 0;
+  overflow: hidden; /* also contains the floated children */
+}
+
+/* Each block is a float sibling of the next; without a clear they overlap the
+   moment one grows past its old fixed height. */
+.zoo-site #content > div {
+  clear: both;
+}
+
+.zoo-site #content div#featured,
+.zoo-site #content div.featured,
+.zoo-site #featured,
+.zoo-site .featured {
+  overflow: hidden;
+  height: auto;
+  min-height: 191px;
+}
+
+/* Long runs of headings and paragraphs after a float — "Things to do" on The
+   Zoo, "Before you visit" on Visitors Info — must start below the image rather
+   than wrapping across it. */
+.zoo-site #content div#zoo h3,
+.zoo-site #content div#info h2,
+.zoo-site #content div#zoo h4 {
+  clear: both;
+}
+
+/* The template pins body copy to 585px, which overflows once a column narrows.
+   Matches `#content div p` / `#content div h4` exactly. */
+.zoo-site #content div p,
+.zoo-site #content div h4 {
+  width: auto;
+  max-width: 585px;
+}
+
+.zoo-site #content div#zoo p,
+.zoo-site #content div#zoo h4,
+.zoo-site #content div#info p,
+.zoo-site #content div#contact p,
+.zoo-site #content div#tickets p {
+  width: auto;
+  max-width: 100%;
+}
+
+/* ── The page background grows with the text ──────────────────────────── */
+
+/* bg-page.gif is a fixed 960×1179 graphic, so a taller page ran off the bottom
+   of it onto bare tile. Stretching it to the element's full height means the
+   page panel always spans the content, however long the text gets. */
+.zoo-site #page {
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% 100%;
+}
+
+/* ── Images stay inside their frames ──────────────────────────────────── */
+
+.zoo-site img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Gallery/ticket/event frames are fixed boxes with a 1px inset — clip the
+   picture to the box so it cannot spill over the background. */
+.zoo-site #content div#gallery ul li div,
+.zoo-site #content div#tickets ul li div,
+.zoo-site #content div#events ul li div {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.zoo-site #content div#gallery ul li div a img,
+.zoo-site #content div#tickets ul li div a img,
+.zoo-site #content div#events ul li div a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Blog thumbnails (gorilla-2, snake-2, butterfly-2) float beside a fixed-width
+   heading — cap them so a wider image cannot push out of its column. */
+.zoo-site #content div div ul li img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Newsletter form ──────────────────────────────────────────────────── */
+
+/* .section3 is 175px wide but the input is hard-set to 158px *plus* 10px of
+   padding and a border, so it overflowed its column. */
+.zoo-site #content div.section3 form input,
+.zoo-site #content div#contact form input {
+  width: 100%;
+  max-width: 158px;
+  box-sizing: border-box;
+}
+
+.zoo-site #content div.section3 {
+  box-sizing: border-box;
+}
+
+/* The penguin figure is absolutely positioned at a top offset that assumed the
+   old fixed block height. Put it back in flow. */
+.zoo-site #content div.section3 img {
+  position: static;
+  display: block;
+  margin: 15px 0 0;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+
+.zoo-site #header,
+.zoo-site #content,
+.zoo-site #footer div {
+  max-width: 960px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 980px) {
+  .zoo-site #header {
+    padding: 0 12px;
+    text-align: center;
+  }
+
+  .zoo-site #header a#logo {
+    height: auto;
+    width: auto;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .zoo-site #header a#logo img {
+    left: 0;
+    max-width: 100%;
+  }
+
+  /* The nav is absolutely positioned on desktop; return it to flow and wrap. */
+  .zoo-site #header ul#navigation {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  /* The selected-tab sprite is cut for the desktop bar, so drop it and use a
+     flat highlight — otherwise the slice shows through on wrapped rows. */
+  .zoo-site #header ul#navigation li,
+  .zoo-site #header ul#navigation li#link1,
+  .zoo-site #header ul#navigation li#link2,
+  .zoo-site #header ul#navigation li#link3,
+  .zoo-site #header ul#navigation li#link4,
+  .zoo-site #header ul#navigation li#link5,
+  .zoo-site #header ul#navigation li#link6,
+  .zoo-site #header ul#navigation li#link7 {
+    width: auto;
+    height: auto;
+    line-height: normal;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+  }
+
+  .zoo-site #header ul#navigation li a {
+    display: block;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .zoo-site #header ul#navigation li#link1.selected,
+  .zoo-site #header ul#navigation li#link2.selected,
+  .zoo-site #header ul#navigation li#link3.selected,
+  .zoo-site #header ul#navigation li#link4.selected,
+  .zoo-site #header ul#navigation li#link5.selected,
+  .zoo-site #header ul#navigation li#link6.selected,
+  .zoo-site #header ul#navigation li#link7.selected {
+    background: #dfc185;
+  }
+
+  .zoo-site #header ul#navigation li.selected a {
+    color: #4e311f;
+  }
+
+  .zoo-site #header ul {
+    width: auto;
+    margin: 10px 0 0;
+  }
+
+  .zoo-site #header ul li {
+    width: 33.33%;
+    box-sizing: border-box;
+  }
+
+  /* Hero figure and the "Buy tickets" button are absolutely placed on desktop. */
+  .zoo-site #header img {
+    position: static;
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+  }
+
+  .zoo-site #header a {
+    position: static;
+    width: 100%;
+    max-width: 306px;
+    margin: 10px auto;
+  }
+
+  .zoo-site #header div {
+    width: auto;
+    height: auto;
+    background: #7c0d18;
+    padding: 8px 12px;
+  }
+
+  .zoo-site #header div h1,
+  .zoo-site #header div p {
+    float: none;
+    height: auto;
+    line-height: 1.4;
+    margin: 0;
+    padding: 4px 0;
+    font-size: 18px;
+  }
+
+  /* Every floated content column becomes full width. */
+  .zoo-site #content div.section1,
+  .zoo-site #content div.section2,
+  .zoo-site #content div.section3,
+  .zoo-site #content div div#section1,
+  .zoo-site #content div div#section2 {
+    float: none;
+    width: auto;
+    max-width: 100%;
+    padding: 0 12px;
+    margin: 15px 0 0;
+  }
+
+  .zoo-site #content div {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Gallery and tickets: fluid wrapped tiles instead of fixed float columns. */
+  .zoo-site #content div#gallery {
+    width: auto;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .zoo-site #content div#gallery ul,
+  .zoo-site #content div#tickets ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .zoo-site #content div#gallery ul li,
+  .zoo-site #content div#tickets ul li {
+    float: none;
+    margin: 0;
+    width: 214px;
+    max-width: 100%;
+  }
+
+  .zoo-site #content div#gallery ul li div,
+  .zoo-site #content div#tickets ul li div {
+    width: 100%;
+  }
+
+  .zoo-site #content div#events ul li div {
+    float: none;
+    width: 100%;
+    max-width: 268px;
+    margin: 0 0 12px;
+  }
+
+  .zoo-site #content div#events ul li p,
+  .zoo-site #content div#events ul li h4,
+  .zoo-site #content div#events ul li h4 a {
+    width: auto;
+    float: none;
+  }
+
+  .zoo-site #content div#info ul li {
+    float: none;
+    width: auto;
+    margin: 0 0 24px;
+  }
+
+  /* Featured strip wraps rather than overflowing its 191px sprite panel. */
+  .zoo-site #content div#featured ul,
+  .zoo-site #content div.featured ul,
+  .zoo-site #featured ul,
+  .zoo-site .featured ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    float: none;
+    padding: 5px 10px 10px;
+  }
+
+  .zoo-site #content div#featured ul li,
+  .zoo-site #content div.featured ul li,
+  .zoo-site #featured ul li,
+  .zoo-site .featured ul li {
+    float: none;
+    margin: 0;
+  }
+
+  .zoo-site #content div#featured,
+  .zoo-site #content div.featured,
+  .zoo-site #featured,
+  .zoo-site .featured {
+    background: rgba(255, 255, 255, 0.35);
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .zoo-site #content div#featured h2,
+  .zoo-site #content div.featured h2,
+  .zoo-site #featured h2,
+  .zoo-site .featured h2 {
+    padding: 12px 0 0 12px;
+    font-size: 22px;
+  }
+
+  /* Footer columns stack. */
+  .zoo-site #footer div a.logo,
+  .zoo-site #footer div div,
+  .zoo-site #footer div ul,
+  .zoo-site #footer div ul.navigation {
+    float: none;
+    width: auto;
+    margin: 0 0 16px;
+    padding-top: 0;
+  }
+
+  .zoo-site #footer div {
+    padding: 20px 12px;
+  }
+
+  .zoo-site #footer div ul.navigation li {
+    width: 50%;
+  }
+}
+
+@media (max-width: 520px) {
+  .zoo-site #header ul li {
+    width: 100%;
+    border-style: none;
+    padding: 6px 0;
+  }
+
+  .zoo-site #content div#gallery ul li,
+  .zoo-site #content div#tickets ul li {
+    width: 100%;
+  }
+
+  .zoo-site #content div h1 {
+    font-size: 24px;
+  }
+}
