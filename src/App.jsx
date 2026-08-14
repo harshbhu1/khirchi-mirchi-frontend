@@ -17,6 +17,19 @@ const UploadView = lazy(() => import("./views/upload/UploadView"));
 const ReportsView = lazy(() => import("./views/reports/ReportsView"));
 const AboutView = lazy(() => import("./views/about/AboutView"));
 const MusicView = lazy(() => import("./views/music/MusicView"));
+// The poem book pulls in framer-motion and its own stylesheet — keep it lazy.
+const PoemView = lazy(() => import("./views/poem/PoemView"));
+
+// The zoo is a mini-site with its own chrome — one lazy chunk per page, plus the
+// shared layout, so visiting /zoo doesn't pull in all seven pages at once.
+const ZooLayout = lazy(() => import("./components/zoo/ZooLayout"));
+const ZooHome = lazy(() => import("./views/zoo/ZooHome"));
+const TheZoo = lazy(() => import("./views/zoo/TheZoo"));
+const VisitorsInfo = lazy(() => import("./views/zoo/VisitorsInfo"));
+const Tickets = lazy(() => import("./views/zoo/Tickets"));
+const ZooEvents = lazy(() => import("./views/zoo/Events"));
+const ZooGallery = lazy(() => import("./views/zoo/Gallery"));
+const ZooContact = lazy(() => import("./views/zoo/Contact"));
 
 function RouteFallback() {
   return (
@@ -69,6 +82,85 @@ export default function App() {
               title="Settings"
               description="Workspace preferences, team members, and API configuration."
             />
+          }
+        />
+
+
+        {/* Zoo mini-site. Nested inside the dashboard so the sidebar stays
+            available, and nested internally so ZooLayout's own header, nav
+            and footer persist while only the inner content swaps. */}
+        <Route
+          path="/zoo"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <ZooLayout />
+            </Suspense>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <ZooHome />
+              </Suspense>
+            }
+          />
+          <Route
+            path="the-zoo"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <TheZoo />
+              </Suspense>
+            }
+          />
+          <Route
+            path="visitors-info"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <VisitorsInfo />
+              </Suspense>
+            }
+          />
+          <Route
+            path="tickets"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <Tickets />
+              </Suspense>
+            }
+          />
+          <Route
+            path="events"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <ZooEvents />
+              </Suspense>
+            }
+          />
+          <Route
+            path="gallery"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <ZooGallery />
+              </Suspense>
+            }
+          />
+          <Route
+            path="contact"
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <ZooContact />
+              </Suspense>
+            }
+          />
+        </Route>
+
+        <Route
+          path="/poem"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <PoemView />
+            </Suspense>
           }
         />
 

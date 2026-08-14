@@ -1,4 +1,13 @@
-import { ChartColumn, Contact, Database, Music2, Settings, Upload } from "lucide-react";
+import {
+  BookOpen,
+  ChartColumn,
+  Contact,
+  Database,
+  Music2,
+  PawPrint,
+  Settings,
+  Upload,
+} from "lucide-react";
 
 /** Sidebar order matters — Upload is the landing tab. */
 export const NAV_ITEMS = [
@@ -25,6 +34,18 @@ export const NAV_ITEMS = [
     label: "Settings",
     icon: Settings,
     description: "Workspace preferences",
+  },
+  {
+    to: "/zoo",
+    label: "Zoo",
+    icon: PawPrint,
+    description: "Lucknow Zoo mini-site",
+  },
+  {
+    to: "/poem",
+    label: "Rashmirathi",
+    icon: BookOpen,
+    description: "रश्मिरथी — दिनकर",
   },
   {
     to: "/music",

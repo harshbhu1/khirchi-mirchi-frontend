@@ -11,11 +11,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
     "@reduxjs/toolkit": "^2.12.0",
     "@zxing/browser": "^0.2.1",
     "@zxing/library": "^0.23.0",
     "axios": "^1.17.0",
     "framer-motion": "^13.1.0",
+    "fuse.js": "^7.5.0",
     "html-to-image": "^1.11.13",
     "jsqr": "^1.4.0",
     "lucide-react": "^1.18.0",
