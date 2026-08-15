@@ -15,6 +15,8 @@ export default function DashboardLayout() {
   const { theme, toggleTheme } = useThemeContext();
   const { pathname } = useLocation();
   const isMusicRoute = pathname === "/music";
+  const isGalleryRoute = pathname === "/gallery";
+  const hideFooter = isMusicRoute || isGalleryRoute;
 
   const [collapsed, setCollapsed] = useState(
     () => localStorage.getItem(COLLAPSE_KEY) === "true",
@@ -70,10 +72,10 @@ export default function DashboardLayout() {
           <Outlet />
         </main>
 
-        {!isMusicRoute && <Footer />}
+        {!hideFooter && <Footer />}
 
         {/* Reserves room so the floating "Try in your phone" button never sits over the footer's links. */}
-        {!isMusicRoute && <div aria-hidden="true" className="hidden h-24 lg:block" />}
+        {!hideFooter && <div aria-hidden="true" className="hidden h-24 lg:block" />}
       </div>
 
       {!isMusicRoute && (

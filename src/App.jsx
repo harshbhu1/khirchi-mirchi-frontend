@@ -17,6 +17,7 @@ const UploadView = lazy(() => import("./views/upload/UploadView"));
 const ReportsView = lazy(() => import("./views/reports/ReportsView"));
 const AboutView = lazy(() => import("./views/about/AboutView"));
 const MusicView = lazy(() => import("./views/music/MusicView"));
+const GalleryView = lazy(() => import("./views/gallery/GalleryView"));
 const TryPhoneView = lazy(() => import("./views/tryphone/TryPhoneView"));
 const QrGeneratorView = lazy(() => import("./views/qrgenerator/QrGeneratorView"));
 
@@ -71,6 +72,15 @@ export default function App() {
               title="Settings"
               description="Workspace preferences, team members, and API configuration."
             />
+          }
+        />
+
+        <Route
+          path="/gallery"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <GalleryView />
+            </Suspense>
           }
         />
 

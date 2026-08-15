@@ -2,6 +2,7 @@ import {
   ChartColumn,
   Contact,
   Database,
+  Images,
   Music2,
   QrCode,
   Settings,
@@ -34,6 +35,12 @@ export const NAV_ITEMS = [
     label: "Settings",
     icon: Settings,
     description: "Workspace preferences",
+  },
+  {
+    to: "/gallery",
+    label: "Gallery",
+    icon: Images,
+    description: "Photos, filtered and full-screen",
   },
   {
     to: "/music",
