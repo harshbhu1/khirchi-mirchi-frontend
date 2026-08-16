@@ -17,6 +17,9 @@ const UploadView = lazy(() => import("./views/upload/UploadView"));
 const ReportsView = lazy(() => import("./views/reports/ReportsView"));
 const AboutView = lazy(() => import("./views/about/AboutView"));
 const MusicView = lazy(() => import("./views/music/MusicView"));
+const GalleryView = lazy(() => import("./views/gallery/GalleryView"));
+const TryPhoneView = lazy(() => import("./views/tryphone/TryPhoneView"));
+const QrGeneratorView = lazy(() => import("./views/qrgenerator/QrGeneratorView"));
 
 function RouteFallback() {
   return (
@@ -73,10 +76,37 @@ export default function App() {
         />
 
         <Route
+          path="/gallery"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <GalleryView />
+            </Suspense>
+          }
+        />
+
+        <Route
           path="/music"
           element={
             <Suspense fallback={<RouteFallback />}>
               <MusicView />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/qr-generator"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <QrGeneratorView />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/try-phone"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <TryPhoneView />
             </Suspense>
           }
         />

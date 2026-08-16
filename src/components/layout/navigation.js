@@ -1,4 +1,14 @@
-import { ChartColumn, Contact, Database, Music2, Settings, Upload } from "lucide-react";
+import {
+  ChartColumn,
+  Contact,
+  Database,
+  Images,
+  Music2,
+  QrCode,
+  Settings,
+  Smartphone,
+  Upload,
+} from "lucide-react";
 
 /** Sidebar order matters — Upload is the landing tab. */
 export const NAV_ITEMS = [
@@ -27,10 +37,30 @@ export const NAV_ITEMS = [
     description: "Workspace preferences",
   },
   {
+    to: "/gallery",
+    label: "Gallery",
+    icon: Images,
+    description: "Photos, filtered and full-screen",
+  },
+  {
     to: "/music",
     label: "Music",
     icon: Music2,
     description: "Village vibes & tunes",
+  },
+  {
+    to: "/qr-generator",
+    label: "QR Generator",
+    icon: QrCode,
+    description: "Turn a message into a QR code",
+  },
+  {
+    to: "/try-phone",
+    label: "Try on Phone",
+    icon: Smartphone,
+    description: "Scan a QR to open on mobile",
+    // Desktop gets a floating button (TryOnPhoneButton) instead — see Sidebar.jsx.
+    mobileOnly: true,
   },
   {
     to: "/about",

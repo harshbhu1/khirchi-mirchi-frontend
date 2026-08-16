@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
@@ -6,12 +6,17 @@ import Footer from "./Footer";
 import { useThemeContext } from "../../context/theme-context";
 import cn from "../../utils/cn";
 
+// Pulls in the qrcode library — kept out of the initial bundle.
+const TryOnPhoneButton = lazy(() => import("../qr/TryOnPhoneButton"));
+
 const COLLAPSE_KEY = "sidebar:collapsed";
 
 export default function DashboardLayout() {
   const { theme, toggleTheme } = useThemeContext();
   const { pathname } = useLocation();
   const isMusicRoute = pathname === "/music";
+  const isGalleryRoute = pathname === "/gallery";
+  const hideFooter = isMusicRoute || isGalleryRoute;
 
   const [collapsed, setCollapsed] = useState(
     () => localStorage.getItem(COLLAPSE_KEY) === "true",
@@ -67,8 +72,17 @@ export default function DashboardLayout() {
           <Outlet />
         </main>
 
-        {!isMusicRoute && <Footer />}
+        {!hideFooter && <Footer />}
+
+        {/* Reserves room so the floating "Try in your phone" button never sits over the footer's links. */}
+        {!hideFooter && <div aria-hidden="true" className="hidden h-24 lg:block" />}
       </div>
+
+      {!isMusicRoute && (
+        <Suspense fallback={null}>
+          <TryOnPhoneButton />
+        </Suspense>
+      )}
     </div>
   );
 }
